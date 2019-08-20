@@ -1,5 +1,6 @@
 1) you Need To create Database like the image with name (DataBase.png)
 2) you need to change ip of links in app from Android Studio and also in php files in folder AndroidAppDatabase to your computer local IP
 3) in Register.php file in AndroidAppDatabase Folder you need to changes mail and password to your mail and password after changing your mail configuration to allow other software to send mail from code
+4) move AndroidAppDatabase folder to your localhost folder in php Server *it is might be htdocs folder*
 
 If any you have any problems runing the app please send me mail to tonyashraf317@gmail.com
