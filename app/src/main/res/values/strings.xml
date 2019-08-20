@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">LoginApp</string>
+    <string name="LoginBtn">login</string>
+    <string name="RegisterBtn">register</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="Confpassword">Confirm Password</string>
+    <string name="f_name">F_Name</string>
+    <string name="L_name">L_Name</string>
+    <string name="phoneNum">Phone Number</string>
+    <string name="address">Address</string>
+    <string name="age">Age</string>
+    <string name="CreateNAccount">Create New Account</string>
+
+    <string-array name="userTypes">
+        <item>Choose User Type</item>
+        <item>Manager</item>
+        <item>Pharmacist</item>
+        <item>Delivery Boy</item>
+        <item>patient</item>
+    </string-array>
+
+    <string-array name="WorkerType">
+        <item>Choose User Type</item>
+        <item>Pharmacist</item>
+        <item>Delivery Boy</item>
+    </string-array>
+</resources>
