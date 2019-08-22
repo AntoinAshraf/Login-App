@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -68,13 +69,7 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
             String post_data = URLEncoder.encode("username", "UTF-8")+"="+URLEncoder.encode(username, "UTF-8");
             post_data += "&"+URLEncoder.encode("password", "UTF-8")+"="+URLEncoder.encode(encrepted_password, "UTF-8");
 
-            getResponceFromConnection(post_data);
-
-            String result = "";
-            String line;
-            while((line = bufferedReader.readLine()) != null){
-                result += line;
-            }
+            String result = getResponceFromConnection(post_data);
 
             closeConnection();
 
@@ -153,7 +148,7 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
         bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
 
         String result = "";
-        String line;
+        String line = "";
         while((line = bufferedReader.readLine()) != null){
             result += line;
         }
@@ -176,11 +171,14 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
         if(type.equals("login")){
             String[] results = result.split("&");
             if(results[0].equals("success")) {
+
                 Toast.makeText(context, " Welcome " + results[1], Toast.LENGTH_SHORT).show();
                 Intent launch = new Intent(context, MainActivity.class);
                 context.startActivity(launch);
-            } else{
+            } else if(result.equals("failed")){
                 Toast.makeText(context, " Failed, Check username and password", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
             }
         } else if(type.equals("register")){
             if(result.equals("Success")) {

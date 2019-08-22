@@ -40,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
                 BackGroundWorker backGroundWorker = new BackGroundWorker(this);
                 backGroundWorker.execute(type, username, password);
 
+
+
                 hideLoadingBar();
             } else{
                 hideLoadingBar();
