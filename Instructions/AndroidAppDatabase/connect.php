@@ -1,3 +1,5 @@
+
+
 <?php
 	$db_name = "pharmacy_database";
 	$mysql_username = "root";
