@@ -7,4 +7,11 @@
     android:id="@+id/toolbar"
     android:background="@color/colorPrimaryDark">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pharmacy App"
+        android:textColor="@color/colorPrimary2"
+        android:textSize="24sp" />
+
 </androidx.appcompat.widget.Toolbar>

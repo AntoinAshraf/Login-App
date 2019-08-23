@@ -1,5 +1,5 @@
 <?php
-	
+
 	require "connect.php";
 
 	$email = $_POST['email'];
@@ -29,7 +29,7 @@
 	
 	$mysql_qry = "INSERT INTO users (Email, phoneNum, Password, Address, F_Name, L_Name, Add_Permition, Sell_Permition, Age, Type_Number) VALUES ('$email', '$phoneNum', '$user_pass', '$Address', '$F_name', '$L_name', $Add_PermitionInt, $Sell_PermitionInt, $AgeInt, $Type_Number);";
 
-	$mysql_qryCheck = "SELECT * from users where Email like '$email' ;";
+	$mysql_qryCheck = "SELECT * FROM users WHERE Email LIKE '$email' ;";
 	
 	$result = mysqli_query($conn, $mysql_qryCheck);
 
@@ -39,7 +39,7 @@
 		if($conn->query($mysql_qry) === TRUE){
 			$mailto = $email;
 		    $mailSub = "Pharmacy Application";
-		    $mailMsg = "<h3>Click on the link Below to Verify your mail</h3><br><a href='http://localhost/AndroidAppDatabase/Verify.php'>Verify Your Email</a>";
+		    $mailMsg = "<h3>Click on the link Below to Verify your mail</h3><br><a href='http://localhost/AndroidAppDatabase/Verify.php?Email=$email'>Verify Your Email</a>";
 
 		    require 'PHPMailer-master/PHPMailerAutoload.php';
 			$mail = new PHPMailer();
@@ -50,9 +50,9 @@
 			$mail ->Host = "smtp.gmail.com";
 			$mail ->Port = 465; // or 587
 			$mail ->IsHTML(true);
-			$mail ->Username = "YourMail";
-			$mail ->Password = "YourPass";
-			$mail ->SetFrom("From Mail");
+			$mail ->Username = "Your Mail";
+			$mail ->Password = "Your Password";
+			$mail ->SetFrom("Sent from Name");
 			$mail ->Subject = $mailSub;
 			$mail ->Body = $mailMsg;
 			$mail ->AddAddress($mailto);

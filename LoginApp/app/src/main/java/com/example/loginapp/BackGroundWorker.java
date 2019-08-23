@@ -172,9 +172,13 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
             String[] results = result.split("&");
             if(results[0].equals("success")) {
 
-                Toast.makeText(context, " Welcome " + results[1], Toast.LENGTH_SHORT).show();
-                Intent launch = new Intent(context, MainActivity.class);
+                Toast.makeText(context, " Welcome " + results[5], Toast.LENGTH_SHORT).show();
+                Intent launch = new Intent(context, InfoPageActivity.class);
+
+                launch.putExtra("PersonData", results);
+
                 context.startActivity(launch);
+
             } else if(result.equals("failed")){
                 Toast.makeText(context, " Failed, Check username and password", Toast.LENGTH_SHORT).show();
             }else{
