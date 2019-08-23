@@ -1,8 +1,6 @@
 <?php
 	require "connect.php";
 
-	//$user_name = 'pharmacymail579@gmail.com';
-	//$user_pass = '5994471ABB01112AFCC18159F6CC74B4F511B99806DA59B3CAF5A9C173CACFC5';
 	$user_name = $_POST['username'];
 	$user_pass = $_POST['password'];
 	$mysql_qry = "SELECT * FROM users WHERE Email LIKE '$user_name' AND Password LIKE '$user_pass';";

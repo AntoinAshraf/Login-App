@@ -11,6 +11,10 @@
     <string name="address">Address</string>
     <string name="age">Age</string>
     <string name="CreateNAccount">Create New Account</string>
+    <string name="SendMailBtn">Send Mail</string>
+    <string name="Mailconfirm">Enter Recieved Code</string>
+    <string name="ConfirmMailBtnTxt">Confirm Mail</string>
+    <string name="changePassword">Change Password</string>
 
     <string-array name="userTypes">
         <item>Choose User Type</item>

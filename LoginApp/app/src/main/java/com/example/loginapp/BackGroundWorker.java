@@ -41,18 +41,74 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
         type = params[0];
-        String Request_url = "";
+        String Request_url = "http://192.168.1.7/AndroidAppDatabase/";
         algorithm = "SHA-256";
         if(type.equals("login")){
-            Request_url = "http://192.168.1.7/AndroidAppDatabase/login.php";
+            String Request_urlSend = Request_url + "login.php";
 
-            return onLoginExecute(params[2], params[1], Request_url);
+            return onLoginExecute(params[2], params[1], Request_urlSend);
 
         }else if(type.equals("register")){
-            Request_url = "http://192.168.1.7/AndroidAppDatabase/register.php";
+            String Request_urlSend = Request_url + "register.php";
 
-            return onRegisterExecute(params[1], params[2], params[3], params[4], params[5], params[7], params[6], Request_url, params[8]);
+            return onRegisterExecute(params[1], params[2], params[3], params[4], params[5], params[7], params[6], Request_urlSend, params[8]);
 
+        }else if(type.equals("forgetPass")){
+            String Request_urlSend = Request_url + "forgetPass.php";
+
+            return onForgetPassExecute(params[1], Request_urlSend);
+        }else if(type.equals("changePass")){
+            String Request_urlSend = Request_url + "changePass.php";
+
+            return onChangePassExecute(params[1], params[2], Request_urlSend);
+        }
+
+        return null;
+    }
+
+    private String onChangePassExecute(String Email, String newPassword, String Request_url){
+        try {
+            String encrepted_password = generateHash(newPassword, algorithm);
+
+            URL url = new URL(Request_url);
+            openConnection(url);
+
+            String post_data = URLEncoder.encode("username", "UTF-8")+"="+URLEncoder.encode(Email, "UTF-8");
+            post_data += "&"+URLEncoder.encode("newpassword", "UTF-8")+"="+URLEncoder.encode(encrepted_password, "UTF-8");
+
+            String result = getResponceFromConnection(post_data);
+
+            closeConnection();
+
+            return result;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    private String onForgetPassExecute(String Email, String Request_url){
+        try{
+            URL url = new URL(Request_url);
+            openConnection(url);
+
+            String post_data = URLEncoder.encode("username", "UTF-8")+"="+URLEncoder.encode(Email, "UTF-8");
+
+            String result = getResponceFromConnection(post_data);
+
+
+            closeConnection();
+
+            return result;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return null;
@@ -168,8 +224,9 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
+        String spliter = "&";
         if(type.equals("login")){
-            String[] results = result.split("&");
+            String[] results = result.split(spliter);
             if(results[0].equals("success")) {
 
                 Toast.makeText(context, " Welcome " + results[5], Toast.LENGTH_SHORT).show();
@@ -182,7 +239,7 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
             } else if(result.equals("failed")){
                 Toast.makeText(context, " Failed, Check username and password", Toast.LENGTH_SHORT).show();
             }else{
-                Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Something Went wrong\nTry again later", Toast.LENGTH_SHORT).show();
             }
         } else if(type.equals("register")){
             if(result.equals("Success")) {
@@ -193,6 +250,30 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
                 Toast.makeText(context, "Email is already Exists.\nTry to Signin", Toast.LENGTH_LONG).show();
             } else{
                 Toast.makeText(context, "something went Wrong\nPlease Try To register again later", Toast.LENGTH_LONG).show();
+            }
+        }else if(type.equals("forgetPass")){
+            String[] results = result.split(spliter);
+            if(results[0].equals("success")){
+                Intent ForgetPassIntent = new Intent(context, ForgetPassActivity.class);
+                ForgetPassIntent.putExtra("ForgetEmail", results[1]);
+                ForgetPassIntent.putExtra("confirmDigits", results[2]);
+                context.startActivity(ForgetPassIntent);
+
+            }else if(result.equals("MailNotFound")){
+                Toast.makeText(context, "Mail does not Exist", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(context, "Something Went wrong\nTry again later", Toast.LENGTH_SHORT).show();
+            }
+        }else if(type.equals("changePass")){
+            String[] results = result.split(spliter);
+            if(results[0].equals("success")){
+                Intent loginIntent = new Intent(context, LoginActivity.class);
+                loginIntent.putExtra("Email", results[1]);
+                context.startActivity(loginIntent);
+            }else if(result.equals("Failed")){
+                Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(context, "No Responce", Toast.LENGTH_SHORT).show();
             }
         }
     }

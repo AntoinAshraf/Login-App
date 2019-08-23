@@ -39,7 +39,7 @@
 		if($conn->query($mysql_qry) === TRUE){
 			$mailto = $email;
 		    $mailSub = "Pharmacy Application";
-		    $mailMsg = "<h3>Click on the link Below to Verify your mail</h3><br><a href='http://localhost/AndroidAppDatabase/Verify.php?Email=$email'>Verify Your Email</a>";
+		    $mailMsg = "<h3>Click on the link Below to Verify your mail</h3><br><a href='http://192.168.1.7/AndroidAppDatabase/Verify.php?Email=$email'>Verify Your Email</a>";
 
 		    require 'PHPMailer-master/PHPMailerAutoload.php';
 			$mail = new PHPMailer();
@@ -51,8 +51,8 @@
 			$mail ->Port = 465; // or 587
 			$mail ->IsHTML(true);
 			$mail ->Username = "Your Mail";
-			$mail ->Password = "Your Password";
-			$mail ->SetFrom("Sent from Name");
+			$mail ->Password = "your Password";
+			$mail ->SetFrom("from name");
 			$mail ->Subject = $mailSub;
 			$mail ->Body = $mailMsg;
 			$mail ->AddAddress($mailto);

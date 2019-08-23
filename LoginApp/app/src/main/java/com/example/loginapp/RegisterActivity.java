@@ -75,8 +75,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 BackGroundWorker backGroundWorker = new BackGroundWorker(this);
                                 backGroundWorker.execute(type, Fname, Lname, PhoneNumber, Address, age, SelectedUserType, email, password);
-
                                 hideLoadingBar();
+
                             } else {
                                 hideLoadingBar();
                                 Toast.makeText(this, "Enter A password", Toast.LENGTH_SHORT).show();
@@ -117,6 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
     public void onLoginCLick(View view) {
         Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(loginIntent);
+        finish();
     }
 
     public static boolean isNumeric(String strNum) {

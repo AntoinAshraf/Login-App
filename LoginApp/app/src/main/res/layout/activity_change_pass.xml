@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorPrimaryDark2"
-    tools:context=".LoginActivity">
+    tools:context=".ChangePassActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -28,69 +28,42 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true"
             android:layout_marginTop="10dp"
-            android:hint="@string/email">
+            android:hint="@string/password"
+            app:passwordToggleEnabled="true">
 
             <EditText
-                android:id="@+id/EmailEditText"
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:inputType="textEmailAddress"
-                android:textSize="20sp"/>
+                android:inputType="textPassword"
+                app:met_floatingLabel="normal" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true"
             android:layout_marginTop="10dp"
-            android:hint="@string/password">
+            android:hint="@string/Confpassword"
+            app:passwordToggleEnabled="true">
 
             <EditText
-                android:id="@+id/passEditText"
+                android:id="@+id/Confirmpassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
                 android:inputType="textPassword"
-                android:textSize="20sp"/>
+                app:met_floatingLabel="normal" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <ProgressBar
-            android:id="@+id/loadingBarLogin"
-            android:layout_marginTop="30dp"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/changePass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/LoginBtn"
+            android:layout_marginTop="20dp"
             android:background="@color/colorPrimaryDark"
-            android:textColor="@color/colorText"
-            android:onClick="Loginclick"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Dose not have Account: Register"
-            android:textAlignment="center"
-            android:textSize="14sp"
-            android:onClick="onRegisterCLick"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Forget your password"
-            android:textAlignment="center"
-            android:textSize="14sp"
-            android:onClick="onForgetPassClick"/>
+            android:onClick="OnChangePassClick"
+            android:text="@string/changePassword"
+            android:textColor="@color/colorText" />
     </LinearLayout>
 
 </RelativeLayout>

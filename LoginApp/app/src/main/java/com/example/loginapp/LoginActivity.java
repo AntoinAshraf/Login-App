@@ -25,6 +25,15 @@ public class LoginActivity extends AppCompatActivity {
         passwordET = findViewById(R.id.passEditText);
         loadingBar = findViewById(R.id.loadingBarLogin);
         btnLogin = findViewById(R.id.btnLogin);
+
+        if(getIntent()!=null && getIntent().getExtras()!=null) {
+            Bundle extras = getIntent().getExtras();
+            if (!extras.getString("Email").equals(null)) {
+                String EmailString = extras.getString("Email");
+                usernameET.setText(EmailString);
+            }
+        }
+
     }
 
     public void Loginclick(View view) {
@@ -39,8 +48,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 BackGroundWorker backGroundWorker = new BackGroundWorker(this);
                 backGroundWorker.execute(type, username, password);
-
-
 
                 hideLoadingBar();
             } else{
@@ -66,5 +73,13 @@ public class LoginActivity extends AppCompatActivity {
     public void onRegisterCLick(View view) {
         Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(registerIntent);
+        finish();
+    }
+
+    public void onForgetPassClick(View view) {
+        Intent ForgetPassIntent = new Intent(LoginActivity.this, ForgetPassActivity.class);
+        ForgetPassIntent.putExtra("ForgetEmail", usernameET.getText().toString().trim());
+        startActivity(ForgetPassIntent);
+        finish();
     }
 }

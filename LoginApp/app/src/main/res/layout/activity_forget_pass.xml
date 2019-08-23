@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorPrimaryDark2"
-    tools:context=".LoginActivity">
+    tools:context=".ForgetPassActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -33,7 +33,7 @@
             android:hint="@string/email">
 
             <EditText
-                android:id="@+id/EmailEditText"
+                android:id="@+id/ForgetEmailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
@@ -46,51 +46,51 @@
             android:layout_height="wrap_content"
             app:passwordToggleEnabled="true"
             android:layout_marginTop="10dp"
-            android:hint="@string/password">
+            android:hint="@string/Mailconfirm">
 
             <EditText
-                android:id="@+id/passEditText"
+                android:id="@+id/ConfirmMail"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:inputType="textPassword"
+                android:inputType="number"
                 android:textSize="20sp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <ProgressBar
-            android:id="@+id/loadingBarLogin"
-            android:layout_marginTop="30dp"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/sendMailBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="@string/LoginBtn"
+            android:text="@string/SendMailBtn"
             android:background="@color/colorPrimaryDark"
             android:textColor="@color/colorText"
-            android:onClick="Loginclick"/>
+            android:visibility="visible"
+            android:onClick="OnSendMailClick"/>
 
-        <TextView
+        <Button
+            android:id="@+id/ConfirmMailBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Dose not have Account: Register"
-            android:textAlignment="center"
-            android:textSize="14sp"
-            android:onClick="onRegisterCLick"/>
+            android:text="@string/ConfirmMailBtnTxt"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@color/colorText"
+            android:visibility="gone"
+            android:onClick="OnConfirmMailClick"/>
 
         <TextView
+            android:id="@+id/sendCodeAgainTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Forget your password"
+            android:text="Send Code Again"
             android:textAlignment="center"
             android:textSize="14sp"
-            android:onClick="onForgetPassClick"/>
+            android:visibility="gone"
+            android:onClick="OnSendMailClick"/>
+
     </LinearLayout>
 
 </RelativeLayout>
