@@ -3,6 +3,8 @@ package com.example.loginapp;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -38,29 +40,35 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
         context = ctx;
     }
 
+
+
     @Override
     protected String doInBackground(String... params) {
-        type = params[0];
-        String Request_url = "http://192.168.1.7/AndroidAppDatabase/";
-        algorithm = "SHA-256";
-        if(type.equals("login")){
-            String Request_urlSend = Request_url + "login.php";
+        if(isNetworkAvailable()) {
+            type = params[0];
+            String Request_url = "http://192.168.1.8/AndroidAppDatabase/";
+            algorithm = "SHA-256";
+            if (type.equals("login")) {
+                String Request_urlSend = Request_url + "login.php";
 
-            return onLoginExecute(params[2], params[1], Request_urlSend);
+                return onLoginExecute(params[2], params[1], Request_urlSend);
 
-        }else if(type.equals("register")){
-            String Request_urlSend = Request_url + "register.php";
+            } else if (type.equals("register")) {
+                String Request_urlSend = Request_url + "register.php";
 
-            return onRegisterExecute(params[1], params[2], params[3], params[4], params[5], params[7], params[6], Request_urlSend, params[8]);
+                return onRegisterExecute(params[1], params[2], params[3], params[4], params[5], params[7], params[6], Request_urlSend, params[8]);
 
-        }else if(type.equals("forgetPass")){
-            String Request_urlSend = Request_url + "forgetPass.php";
+            } else if (type.equals("forgetPass")) {
+                String Request_urlSend = Request_url + "forgetPass.php";
 
-            return onForgetPassExecute(params[1], Request_urlSend);
-        }else if(type.equals("changePass")){
-            String Request_urlSend = Request_url + "changePass.php";
+                return onForgetPassExecute(params[1], Request_urlSend);
+            } else if (type.equals("changePass")) {
+                String Request_urlSend = Request_url + "changePass.php";
 
-            return onChangePassExecute(params[1], params[2], Request_urlSend);
+                return onChangePassExecute(params[1], params[2], Request_urlSend);
+            }
+        }else{
+            Toast.makeText(context, "No Internet Connection", Toast.LENGTH_SHORT).show();
         }
 
         return null;
@@ -299,5 +307,12 @@ public class BackGroundWorker extends AsyncTask<String, Void, String> {
             hexChars[j * 2 + 1] = hexArray[v & 0x0F];
         }
         return new String(hexChars);
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
